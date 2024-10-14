@@ -16,7 +16,7 @@ let polyline // La polyline en cours de construction;
 
 const polylineMachine = createMachine(
     {
-        /** @xstate-layout N4IgpgJg5mDOIC5QAcD2AbAngGQJYDswA6XCdMAYgFkB5AVQGUBRAYWwEkWBpAbQAYAuohSpYuAC65U+YSAAeiAIwAWAGxEArAHY+fRYoAcAJj5bVWxRoA0ITIgC0yo0S0BOI8r7LXFrZ+WKAL6BNmhYeIREEABOAIYA7gRQ1PTMbJy8grJoYpLSsgoIRgZEAMxGZgZ8GkalbloaqgY2dgiKpRpE7sZGrnyu7creRsGhGDgExDEJSSmMTLQAakz8QkggORJSMuuFHeoayo1OGooeWqWupS0OWlpExtqlpU6uNV4GoxvjEVNxifhkgAhWIAYwA1rBkGCwKtsqItvldoghiU+AYDG8-A1TGcbm1tERirV+kYPKoAm8vmEJpFpgDkkx8OIwNE4etNnkdqBCm4HopVKpSqSdKo+Kp8bV7hpyrUjDUNFUZdSfpMov9ZkxYKDYshYVkOQiuQVEL1lF03u4LE4jIo+NdbIg6nwysoDGKjr1SvoLsEQiB8KgIHB4eFJvDctsTQh7GdXA8tCYycozOKPfjYxSLbUZWYNNoMZ9-TTfiQyGAI4jufIHAZFAmk+cxYKvBn2kQBeiFRYVO0RsXVXSNYDK8bkUUtCU-BShi9TnbrI6EO4iHwyRSzW8pX7AkA */
+        /** @xstate-layout N4IgpgJg5mDOIC5QAcD2AbAngGQJYDswA6XCdMAYgFkB5AVQGUBRAYWwEkWBpAbQAYAuohSpYuAC65U+YSAAeiAIwAWAGxEArAHY+fRYoAcAJj5bVWxRoA0ITIgC0yo0S0BOI8r7LXFrZ+WKAL6BNmhYeIREEABOAIYA7gRQ1PTMbJy8grJoYpLSsgoIRgZEAMxGZgZ8GkalbloaqgY2dgiKpRpE7sZGrnyu7creRsGhGDgExDEJSSmMTLQAakz8QkggORJSMuuFHeoayo1OGooeWqWupS0OWlpExtqlpU6uNV4GoxvjEVNxifhkgAhWIAYwA1rBkGCwKtsqItvldoghiU+AYDG8-A1TGcbm1tERirV+kYPKoAm8vmEJpFpgDkkx8OIwNE4etNnkdqBCm4HopVKpSqSdKo+Kp8bV7hpyrUjDUNFUZdSfpMov9ZkxYKDYshYVkOQiuQVEL1lF03u4LE4jIo+NdbIg6nwysoDGKjr1SvoLsEQiB8KgIHB4eFJvDctsTQh7GdXA8tCYycozOKPfjYxSLR5qqpXELqqVPv6ab8SGQwBHEdz5A4DIoE0nzmLBV4M+0iAL0QqLCp2iMS6q6RrAVXjciiloSn4KUMXqc7dZHQh3EQ+GSKWa3lK-YEgA */
         id: "polyLine",
 
         initial: "idle",
@@ -50,7 +50,7 @@ const polylineMachine = createMachine(
                         target: "drawing",
                         internal: true,
                         actions: "removeLastPoint",
-                        cond: "plusDeUnPoints"
+                        cond: "unPoint"
                     },
 
                     Enter: {
@@ -136,7 +136,7 @@ const polylineMachine = createMachine(
                 return polyline.points().length > 6;
             },
             // On peut enlever un point
-            plusDeUnPoints: (context, event) => {
+            unPoint: (context, event) => {
                 // Deux coordonnées pour chaque point, plus le point provisoire
                 return polyline.points().length > 4;
             },
